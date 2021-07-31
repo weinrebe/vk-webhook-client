@@ -4,6 +4,7 @@
 namespace Weinrebe\VkWebhook;
 
 
+use JsonException;
 use SplObserver;
 use SplSubject;
 
@@ -66,11 +67,15 @@ class Client implements SplSubject
 
     public function getEventType(string $data): string
     {
-        $event = json_decode($data);
-        if (isset($event->type)) {
-            return $event->type;
-        } else {
-            return EventList::UNKNOWN;
+        try {
+            $event = json_decode($data, false, 512, JSON_THROW_ON_ERROR);
+            if (isset($event->type)) {
+                return $event->type;
+            } else {
+                return EventList::UNKNOWN;
+            }
+        } catch (JsonException $e) {
+            return EventList::ERROR_JSON;
         }
 
     }
