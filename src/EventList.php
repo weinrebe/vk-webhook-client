@@ -63,4 +63,5 @@ final class EventList
     public const ALL = '*';
     public const INIT = 'init';
     public const UNKNOWN = 'unknown';
+    public const ERROR_JSON = 'error_json';
 }
