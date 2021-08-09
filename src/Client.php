@@ -65,15 +65,11 @@ class Client implements SplSubject
 
     }
 
-    public function getEventType(string $data): string
+    private function getEventType(string $data): string
     {
         try {
             $event = json_decode($data, false, 512, JSON_THROW_ON_ERROR);
-            if (isset($event->type)) {
-                return $event->type;
-            } else {
-                return EventList::UNKNOWN;
-            }
+            return $event->type ?? EventList::UNKNOWN;
         } catch (JsonException $e) {
             return EventList::ERROR_JSON;
         }
