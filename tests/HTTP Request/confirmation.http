@@ -1,9 +1,0 @@
-### Send POST request with json body
-POST http://localhost:8000/examples/example.php
-Content-Type: application/json
-
-{
-  "type": "confirmation",
-  "group_id": 206136423,
-  "event_id": ""
-}
